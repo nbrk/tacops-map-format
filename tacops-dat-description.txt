@@ -1,0 +1,84 @@
+tacops-map-format
+=================
+
+This document presents information about map data format used in TacOps.
+
+TacOps is a computer simulation of contemporary and near-future tactical ground combat.
+For detailed information about the program refer to Wikipedia or http://tacops.us .
+
+** About TacOps map utility **
+
+Using proprietary map editor (as of TacOps Map Tool v105AA) you open a .bmp picture with a real topo map (or a drawn one).
+The program assumes that 1 real .bmp pixel goes for a 10 meters in the simulation. TacOps models the terrain with terrain cells: one cell equals 100 square meters of the real (modelled) terrain. Each of these cells contain Elevation, Terrain type flags and Roughness information for the underlying ground. This information is then written in a .dat file, which has to have the same name as the .bmp picture. For example, two files Map124c.bmp and Map124c.dat
+from a directory constitute a TacOps map. Please refer to the map editor and TacOps documentation for details.
+
+This means that when you give a 800*400 pixel .bmp file to the editor and create and save your terrain, the program will create the .dat file which describes 80*40 terrain cells. The file format is undocumented by Major H. so i have reverse engineered it.
+
+Hope you will not get angry at me, Major, and thank you for the well designed and deep simulation.
+
+
+** Facts about tacops .dat map file **
+
+1. File consists of Header and Cells sections.
+Header starts from 0x00, cells array begins at 0x38 (and ends with the file).
+
+2. Header structure. Offsets from the beginning of the file.
+0x00 (2 bytes) - Map name (number 124 in "Map124c.(dat|bmp)")
+0x02 (4 bytes) - ? (zeroes)
+0x06 (2 bytes) - Cell matrix width (.bmp file width / 10)
+0x08 (2 bytes) - Cell matrix height (.bmp file height / 10)
+0x0a (4 bytes) - ? (zeroes)
+0x0e (2 bytes) - Ingame map width (equals .bmp file width)
+0x10 (2 bytes) - Ingame map height (uquals .bmp file height)
+0x12 (2 bytes) - ? (seems to be 0x0001)
+0x14 (4 bytes) - ? (zeroes) 
+0x18 (2 bytes) - Ingame map width (equals .bmp file width)
+0x1a (2 bytes) - Ingame map height (uquals .bmp file height)
+0x1c (4 bytes) - ? (zeroes)
+0x20 (4 bytes) - ? (zeroes)
+0x24 (4 bytes) - ? (zeroes)
+0x28 (4 bytes) - ? (zeroes)
+0x2c (4 bytes) - ? (zeroes)
+0x30 (2 bytes) - ? (seems to be 0x0001)
+0x32 (2 bytes?) - UTM Grid Easting for bottom left corner
+0x34 (2 bytes?) - UTM Northing for bottom left corner
+0x36 (2 bytes) - Map Version
+
+3. Cells array structure. The array is a sequence of cells with each cell occupying 2 bytes.
+The first cell goes in 0x38, the second in 0x3a; the array occupies exactly (2 * Ingame map width * Ingame map height) bytes.
+
+4. Cell structure. Each cell consists of what i will call here "Terrain byte" and "Flags byte".
+"Flags byte" goes first, "Terrain byte" goes next.
+
+Consult the TacOps documentation for details about terrain designations.
+
+4a. "Flags byte" structure.
+00000000 0x00 no roughness flags (renders to "Clear")
+00000001 0x01 no-go 1 (wheeled vehicles)
+00000010 0x02 no-go 2 (wheeled & tracked vehicles)
+00000100 0x04 no-go 3 (vehicles & dismounts)
+00001000 0x08 rough 1 
+00010000 0x10 rough 2
+00011000 0x18 rough 3
+00100000 0x20 rough 4
+00110000 0x30 water
+
+4b. "Terrain byte" structure. Bits may be OR-ed together.
+00000000 0x00 low elevation (L0)
+00000010 0x02 Misc LOS block
+00001000 0x08 hi elevation (L1)
+00100000 0x20 road
+01000000 0x40 woods
+10000000 0x80 town
+
+
+Terrain flags (or'ed):
+0x0000 elev low
+0x0008 elev hi
+0x0020 road
+0x0040 woods
+0x0080 town
+
+Example: 0x48 for +Hi +Woods terrain
+
+There seems to be no tail in the file.
