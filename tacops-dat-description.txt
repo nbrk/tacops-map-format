@@ -9,11 +9,16 @@ For detailed information about the program refer to Wikipedia or http://tacops.u
 ** About TacOps map utility **
 
 Using proprietary map editor (as of TacOps Map Tool v105AA) you open a .bmp picture with a real topo map (or a drawn one).
-The program assumes that 1 real .bmp pixel goes for a 10 meters in the simulation. TacOps models the terrain with terrain cells: one cell equals 100 square meters of the real (modelled) terrain. Each of these cells contain Elevation, Terrain type flags and Roughness information for the underlying ground. This information is then written in a .dat file, which has to have the same name as the .bmp picture. For example, two files Map124c.bmp and Map124c.dat
-from a directory constitute a TacOps map. Please refer to the map editor and TacOps documentation for details.
+The program assumes that 1 real .bmp pixel goes for a 10 meters in the simulation. TacOps models the terrain with terrain 
+cells: one cell equals 100 square meters of the real (modelled) terrain. Each of these cells contain Elevation, Terrain type
+flags and Roughness information for the underlying ground. This information is then written in a .dat file, which has to 
+have the same name as the .bmp picture. For example, two files Map124c.bmp and Map124c.dat from a directory constitute a 
+TacOps map. Please refer to the map editor and TacOps documentation for details.
 
-This means that when you give a 800*400 pixel .bmp file to the editor and create and save your terrain, the program will create the .dat file which describes 80*40 terrain cells. The file format is undocumented by Major H. so i have reverse engineered it.
+This means that when you give a 800*400 pixel .bmp file to the editor and create and save your terrain, the program will 
+create the .dat file which describes 80*40 terrain cells.
 
+The file format is undocumented by Major H. so i have reverse engineered it.
 Hope you will not get angry at me, Major, and thank you for the well designed and deep simulation.
 
 
