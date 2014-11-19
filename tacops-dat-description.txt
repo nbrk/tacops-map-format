@@ -64,20 +64,12 @@ Consult the TacOps documentation for details about terrain designations.
 00110000 0x30 water
 
 4b. "Terrain byte" structure. Bits may be OR-ed together.
-00000000 0x00 low elevation (L0)
+00000000 0x00 low elevation (E0)
 00000010 0x02 Misc LOS block
-00001000 0x08 hi elevation (L1)
+00001000 0x08 hi elevation (E1)
 00100000 0x20 road
 01000000 0x40 woods
 10000000 0x80 town
-
-
-Terrain flags (or'ed):
-0x0000 elev low
-0x0008 elev hi
-0x0020 road
-0x0040 woods
-0x0080 town
 
 Example: 0x48 for +Hi +Woods terrain
 
