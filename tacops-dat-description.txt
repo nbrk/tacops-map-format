@@ -25,7 +25,7 @@ Hope you will not get angry at me, Major, and thank you for the well designed an
 ** Facts about tacops .dat map file **
 
 1. File consists of Header and Cells sections.
-Header starts from 0x00, cells array begins at 0x38 (and ends with the file).
+Header starts from 0x00, cells array begins at 0x40 (and ends with the file).
 
 2. Header structure. Offsets from the beginning of the file.
 0x00 (2 bytes) - Map name (number 124 in "Map124c.(dat|bmp)")
@@ -48,9 +48,10 @@ Header starts from 0x00, cells array begins at 0x38 (and ends with the file).
 0x32 (2 bytes?) - UTM Grid Easting for bottom left corner
 0x34 (2 bytes?) - UTM Northing for bottom left corner
 0x36 (2 bytes) - Map Version
+0x38 (8 bytes?) - Map name characters (e.g. "Map003c\0")
 
 3. Cells array structure. The array is a sequence of cells with each cell occupying 2 bytes.
-The first cell goes in 0x38, the second in 0x3a; the array occupies exactly (2 * Ingame map width * Ingame map height) bytes.
+The first cell goes in 0x40, the second in 0x42; the array occupies exactly (2 * Ingame map width * Ingame map height) bytes.
 
 4. Cell structure. Each cell consists of what i will call here "Terrain byte" and "Flags byte".
 "Flags byte" goes first, "Terrain byte" goes next.
