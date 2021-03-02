@@ -80,3 +80,23 @@ Consult the TacOps documentation for details about terrain designations.
 Example: 0x48 for +Hi +Woods terrain
 
 There seems to be no tail in the file.
+
+** Examples **
+As an example to above, one may use the following struct to read the header from a stream:
+
+struct TacopsDatHeader {
+  gint16 number;
+  guchar unknown0[4];
+  gint16 ncols;
+  gint16 nrows;
+  guchar unknown1[4];
+  gint16 width;
+  gint16 height;
+  guchar unknown2[32];
+  gint16 easting;
+  gint16 northing;
+  gint16 version;
+  gchar name[8];
+};
+
+It is then a matter of reading enough (ncols * nrows) shorts afterwards continuing in the stream or after seeking at offset 0x40.
