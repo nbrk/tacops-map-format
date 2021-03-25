@@ -51,7 +51,7 @@ Header starts from 0x00, cells array begins at 0x40 (and ends with the file).
 0x38 (8 bytes?) - Map name characters (e.g. "Map003c\0")
 
 3. Cells array structure. The array is a sequence of cells with each cell occupying 2 bytes.
-The first cell goes in 0x40, the second in 0x42; the array occupies exactly (2 * Ingame map width * Ingame map height) bytes.
+The first cell goes in 0x40, the second in 0x42; the array occupies exactly (2 * Cell matrix width * Cell matrix height) bytes.
 
 4. Cell structure. Each cell consists of what i will call here "Terrain byte" and "Flags byte".
 "Flags byte" goes first, "Terrain byte" goes next.
