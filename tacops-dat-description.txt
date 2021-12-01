@@ -54,7 +54,7 @@ Header starts from 0x00, cells array begins at 0x40 (and ends with the file).
 The first cell goes in 0x40, the second in 0x42; the array occupies exactly (2 * Cell matrix width * Cell matrix height) bytes.
 
 4. Cell structure. Each cell consists of what i will call here "Terrain byte" and "Flags byte".
-"Flags byte" goes first, "Terrain byte" goes next.
+"Flags byte" is low, "Terrain byte" is hi.
 
 Consult the TacOps documentation for details about terrain designations.
 
