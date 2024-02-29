@@ -1,0 +1,9 @@
+DEFINITION MODULE MapsDat;
+
+(* Support of the original TacOps .dat (type 3) map files *)
+
+IMPORT Maps;
+
+PROCEDURE createFromFile (path : ARRAY OF CHAR; VAR m : Maps.Map);
+
+END MapsDat.
